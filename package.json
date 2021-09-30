@@ -1,0 +1,19 @@
+{
+  "name": "node-project",
+  "version": "1.0.0",
+  "description": "Node Practice Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yajindragautam/Node_Project.git"
+  },
+  "author": "yaji",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yajindragautam/Node_Project/issues"
+  },
+  "homepage": "https://github.com/yajindragautam/Node_Project#readme"
+}
