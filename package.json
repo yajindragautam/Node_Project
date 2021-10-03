@@ -1,5 +1,5 @@
 {
-  "name": "node-project",
+  "name": "project",
   "version": "1.0.0",
   "description": "Node Practice Project",
   "main": "index.js",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/yajindragautam/Node_Project/issues"
   },
-  "homepage": "https://github.com/yajindragautam/Node_Project#readme"
+  "homepage": "https://github.com/yajindragautam/Node_Project#readme",
+  "dependencies": {
+    "nodemon": "^2.0.13"
+  }
 }
