@@ -1,14 +1,15 @@
-const http = require("http");
-const https = require("https");
-const url = require("url");
+const express = require('express');
+const app = express();
 
-const server = https.createServer((request, response) => {
-  response.writeHead(200, { "Content-Type": "text/html" });
-  response.write("<h1>Hello Yajindra</h1>");
-  response.end();
-});
+app.get('/',(req,res)=>{
+  res.json({
+    message: 'Hello World'
+  })
+})
 
-const port = 8000;
-server.listen(port, () => {
-  console.log("Server is running at port 8000");
-});
+app.get('about',(req,res)=>{
+  res.send('This is about our history')
+})
+
+app.listen(3000);
+
