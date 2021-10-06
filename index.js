@@ -24,7 +24,8 @@ app.get("/users", (req, res) => {
 
 // create new users, Request Method: POST
 app.post("/users", (req, res) => {
-  req.json(req)
+  users.push(req.body);
+  res.status(201).json(req.body);
 });
 
 // get user by id, Request Method: Get
@@ -33,6 +34,34 @@ app.get('/users/:id',(req, res) => {
   if (!user) res.status(404).send('The user with the given ID was not found.');
   res.json(user);
 })
+
+//
+app.put("/users/:id",(req,res)=>{
+  let userIndex = user.findIndex((user)=> user.id === parseInt(req.params.id));
+  if(userIndex > users.length){
+    return res.status(404).json({
+      error:'User Not Found'
+    })
+  }
+  users[userIndex]['name'] = req.body.name;
+  users[userIndex]["email"] = req.body.email;
+  users[userIndex]["address"] = req.body.address;
+  res.json(req.body);
+});
+
+// DELETE
+app.delete('/users/:id',(req,res)=>{
+  let userIndex = user.findIndex((user) => user.id === parseInt(req.params.id));
+  if (userIndex > users.length) {
+    return res.status(404).json({
+      error: "User Not Found",
+    });
+  }
+
+  users.splice(userIndex,1);
+  res.status(204).json({message:"The user has been deleted"});
+})
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
