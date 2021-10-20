@@ -6,7 +6,7 @@ const route = require("./routes/index");
 
 app.use(bodyParser.json());
 
-//middleware
+//middleware - Middleware is used to intercept req , res   
 app.use((req, res, next) => {
   console.log("This is middleware! Body: ", req.body);
   // res.json({message: 'returned from middleware!'})
