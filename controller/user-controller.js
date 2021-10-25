@@ -1,13 +1,21 @@
-let users = []; // id, name, email, address
+const mongoose = require('mongoose');
+const User = mongoose.model("User");
 
-const getAllUser = (req, res) => {
-  res.json(users);
+
+
+const getAllUser = async(req, res) => {
+    const users = await User.find();
+    res.json(users);
 };
 
-const createUser = (req, res) => {
-  users.push(req.body);
+const createUser = async(req, res) => {
+  // const user = new User(req.body); - EASY TO DO
+  const {email, password,name, status, phone, address, age} = req.body;
+  const user = new User({ email, password, name, status, phone, address, age });
+  await user.save();
   res.status(201).json(req.body);
 };
+
 
 const getUserById = (req, res) => {
   let user = users.find((user) => user.id === parseInt(req.params.id));
@@ -43,7 +51,7 @@ const deleteUser = (req, res) => {
   }
   users.splice(userIndex, 1);
   res.status(204).json({ message: "The user has been deleted" });
-};
+}; 
 
 module.exports = {
   getAllUser,
@@ -51,4 +59,5 @@ module.exports = {
   getUserById,
   updateUser,
   deleteUser,
+  
 };

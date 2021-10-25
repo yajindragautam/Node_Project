@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const userController = require('../controller/user-controller');
-const hubbyController = require('../controller/hobby-controller');
+const userController = require("../controller/user-controller");
+const hubbyController = require("../controller/hobby-controller");
 
 // CROU IN ARRAY
 let users = [];
