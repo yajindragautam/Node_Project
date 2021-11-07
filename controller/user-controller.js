@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const getAllUser = async (req, res) => {
   const users = await User.find();
@@ -79,7 +80,18 @@ const login = async (req, res) => {
   if (!matchPassword) {
     return res.status(401).json({ error: "Invalid Email / Password" });
   }
-  return res.status(200).json(user);
+
+  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+
+  return res.status(200).json({
+    token,
+  });
+};
+
+const getProfile = (req, res) => {
+  let user = { ...req.user.toJSON() };
+  delete user.password;
+  res.json(user);
 };
 
 module.exports = {
@@ -89,4 +101,5 @@ module.exports = {
   updateUser,
   deleteUser,
   login,
+  getProfile,
 };
