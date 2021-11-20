@@ -2,6 +2,15 @@ const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const userService = require('../../service/user-service');
+
+/*
+users:[
+    {id:1,name:'Yajindra'},
+    {id:2,name:'John'}  ,
+  ]
+*/
+
 
 const getAllUser = async (req, res) => {
   const users = await User.find();
@@ -10,10 +19,8 @@ const getAllUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   // const user = new User(req.body); - EASY TO DO
-  const { email, password, name, status, phone, address, age } = req.body;
-  const user = new User({ email, password, name, status, phone, address, age });
-  await user.save();
-  res.status(201).json(req.body);
+  const user = await userService.create(req.body);
+  res.status(201).json(user);
 };
 
 const getUserById = async (req, res) => {
@@ -22,7 +29,7 @@ const getUserById = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const user = await User.findById(req.params.json);
+  const user = await User.findById(req.params.id);
   if (!user) {
     return res.status(404).json({ error: "ID not found" });
   }

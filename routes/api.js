@@ -1,20 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const loginValidation = require("../validator/login-validation");
-const userController = require("../controller/user-controller");
+const userController = require("../controller/api/user-controller");
 const userValidator = require("../validator/user-validator");
 const catchError = require("../handler/validation-error-handler");
 const UserValidator = require("../validator/user-validator");
 const verifyToken = require("../middleware/auth");
+const checkObjId = require("../middleware/object-id-check");
 
-// CROU IN ARRAY
-let users = [];
 
 // Login
 router.post("/login", loginValidation, catchError(userController.login));
 
 // get all users, Request Method: Get
-router.get("/users",verifyToken, userController.getAllUser);
+router.get("/users", verifyToken, userController.getAllUser);
 
 // create new users, Request Method: POST
 router.post("/register", userValidator, catchError(userController.createUser));
@@ -23,12 +22,18 @@ router.post("/register", userValidator, catchError(userController.createUser));
 router.get("/profile", verifyToken, userController.getProfile);
 
 // get user by id, Request Method: Get
-router.get("/users/:id",verifyToken ,userController.getUserById);
+router.get("/users/:id", checkObjId, userController.getUserById);
 
 //
-router.put("/users/:id",verifyToken, UserValidator, catchError(userController.updateUser));
+router.put(
+  "/users/:id",
+  checkObjId,
+  verifyToken,
+  UserValidator,
+  catchError(userController.updateUser)
+);
 
 // DELETE
-router.delete("/users/:id",verifyToken, userController.deleteUser);
+router.delete("/users/:id", checkObjId, verifyToken, userController.deleteUser);
 
 module.exports = router;
