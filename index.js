@@ -37,6 +37,8 @@ app.use((req, res, next) => {
   res.locals.oldData = req.flash('oldData')[0] || {}
   res.locals.alert = req.flash("alert")[0];
   res.locals.flash = req.flash();
+   res.locals.user = req.session && req.session.user ? req.session.user: null;
+   res.locals.isLogged = req.session && req.session.isLogged ? true : false;
   // console.log(res.locals);
   next();
 });
@@ -47,6 +49,8 @@ app.use((req, res, next) => {
   // res.json({message: 'returned from middleware!'})
   next();
 });
+// Middleware to Serve Static Files
+app.use(express.static("public"));
 
 app.use("/api", apiRoute);
 app.use("/", webRoute);

@@ -64,9 +64,20 @@
                         called the hero unit and three supporting pieces of content. Use it as a starting point to
                         create something more unique.
                     </p>
-                    <p>
-                        <a class="btn btn-primary btn-large" href="/login">Login Here..</a>
-                    </p>
+                    <!-- For Not Logged In Users -->
+                    <% if(!isLogged ) { %>
+                        <p>
+                            <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
+                            <a class="btn btn-success btn-lg" href="/register" role="button">Register</a>
+                        </p>
+                        <% } %>
+
+                            <!-- Sow Only In Logged In -->
+                            <% if (isLogged ) { %>
+                                <p>
+                                    <a class="btn btn-primary btn-large" href="/logout">Logout</a>
+                                </p>
+                                <% } %>
                 </div>
             </div>
         </div>
@@ -85,9 +96,7 @@
                             called the hero unit and three supporting pieces of content. Use it as a starting point to
                             create something more unique.
                         </p>
-                        <p>
-                            <a class="btn btn-primary btn-large" href="/register">Click To Register</a>
-                        </p>
+
                 </div>
             </div>
         </div>
