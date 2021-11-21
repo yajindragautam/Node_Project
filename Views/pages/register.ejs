@@ -7,50 +7,125 @@
             <h1>
                 Register
             </h1>
+            <!-- <H4>
+                <%= JSON.stringify(errors) %>
+            </H4> -->
             <div class="col-md-12">
                 <form role="form" action="/register" method="POST">
 
                     <div class="form-group">
 
-                        <label for="exampleInputEmail1">
-                            Email address
+                        <label for="email">
+                            Email
                         </label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" />
+                        <input type="email" name="email" class="
+                        form-control
+                        <%=
+                        errors.email
+                        ?
+                        'is-invalid'
+                        :
+                        ''
+                        %>
+                      " id="email" value="<%= oldData.email || '' %>" />
+                        <div class="invalid-feedback">
+                            <%= errors.email ? errors.email.msg : "" %>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="name">
                             Name
                         </label>
-                        <input type="text" class="form-control" id="name" />
+                        <input type="text" name="name" class="
+                        form-control
+                        <%=
+                        errors.name
+                        ?
+                        'is-invalid'
+                        :
+                        ''
+                        %>
+                      " id="name" value="<%= oldData.name || '' %>" />
+                        <div class="invalid-feedback">
+                            <%= errors.name ? errors.name.msg : "" %>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="phone">
                             Phone
                         </label>
-                        <input type="text" class="form-control" id="phone" />
+                        <input type="text" name="phone" class="
+                        form-control
+                        <%=
+                        errors.phone
+                        ?
+                        'is-invalid'
+                        :
+                        ''
+                        %>
+                      " id="phone" value="<%= oldData.phone || '' %>" />
+                        <div class="invalid-feedback">
+                            <%= errors.phone ? errors.phone.msg : "" %>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="address">
                             Address
                         </label>
-                        <input type="text" class="form-control" id="address" />
+                        <input type="text" name="address" class="
+                        form-control
+                        <%=
+                        errors.address
+                        ?
+                        'is-invalid'
+                        :
+                        ''
+                        %>
+                      " id="address" value="<%= oldData.address || '' %>" />
+                        <div class="invalid-feedback">
+                            <%= errors.address ? errors.address.msg : "" %>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="age">
                             Age
                         </label>
-                        <input type="number" class="form-control" id="age" />
+                        <input type="number" name="age" class="
+                        form-control
+                        <%=
+                        errors.age
+                        ?
+                        'is-invalid'
+                        :
+                        ''
+                        %>
+                      " id="age" value="<%= oldData.age || '' %>" />
+                        <div class="invalid-feedback">
+                            <%= errors.age ? errors.age.msg : "" %>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleInputPassword1">
+                        <label for="password">
                             Password
                         </label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" />
+                        <input type="password" name="password" class="
+                        form-control
+                        <%=
+                        errors.password
+                        ?
+                        'is-invalid'
+                        :
+                        ''
+                        %>
+                      " id="password" />
+                        <div class="invalid-feedback">
+                            <%= errors.password ? errors.password.msg : "" %>
+                        </div>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">

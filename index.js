@@ -9,27 +9,41 @@ const webRoute = require("./routes/web");
 const logMiddleware = require("./middleware/logger");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const flash = require("connect-flash");
 
 // For JSON
 app.use(bodyParser.json());
 // For Form Data
-app.use(bodyParser.urlencoded({ extended: flase }));
+
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 // Templating engine
 app.set("view engine", "ejs");
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    resave: false,
+    resave: true,
     name: "session",
     saveUninitialized: true,
-    cookie: { secure: true },
+    // cookie: { secure: true },
   })
 );
 
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.errors = req.flash("errors")[0] || {};
+  res.locals.oldData = req.flash('oldData')[0] || {}
+  res.locals.alert = req.flash("alert")[0];
+  res.locals.flash = req.flash();
+  // console.log(res.locals);
+  next();
+});
+
 //middleware - Middleware is used to intercept req , res
 app.use((req, res, next) => {
-  console.log("This is middleware! Body: ", req.body);
+  //console.log("This is middleware! Body: ", req.body);
   // res.json({message: 'returned from middleware!'})
   next();
 });

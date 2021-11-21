@@ -12,4 +12,21 @@ const catchValidationError = (fn) => {
   };
 };
 
-module.exports = catchValidationError;
+// Form Validator
+const catchFormValidationError = (fn) => {
+  return function (req, res, next) {
+    const errors = validationResult(req);
+    if (errors.isEmpty()) {
+      return fn(req, res, next).catch(next);
+    }
+    let errorData = errors.mapped();
+    req.flash("errors", errorData);
+    req.flash('oldData', req.body);  // Update old data after validation error
+    return res.redirect("back");
+  };
+};
+
+module.exports = {
+  catchValidationError,
+  catchFormValidationError,
+};

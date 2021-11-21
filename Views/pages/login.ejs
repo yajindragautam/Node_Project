@@ -1,0 +1,62 @@
+<!-- Including Header -->
+<%- include('../partials/html_header'); -%>
+    <%- include('../partials/alert.ejs') %>
+        <!-- Forms From Here -->
+        <div class="container-fluid">
+            <div class="row">
+                <h1>
+                    <%= pageTitle %>
+                </h1>
+
+                <div class="col-md-12">
+                    <form role="form" action="/login" method="POST">
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email
+                            </label>
+                            <input type="email" name="email" class="
+                                            form-control
+                                            <%=
+                                            errors.email
+                                            ?
+                                            'is-invalid'
+                                            :
+                                            ''
+                                            %>
+                                          " id="email" value="<%= oldData.email || '' %>" />
+                            <div class="invalid-feedback">
+                                <%= errors.email ? errors.email.msg : "" %>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">
+                                Password
+                            </label>
+                            <input type="password" name="password" class="
+                        form-control
+                        <%=
+                        errors.password
+                        ?
+                        'is-invalid'
+                        :
+                        ''
+                        %>
+                      " id="password" />
+                            <div class="invalid-feedback">
+                                <%= errors.password ? errors.password.msg : "" %>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">
+                            Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Including Footer -->
+        <%- include('../partials/html_footer'); -%>
