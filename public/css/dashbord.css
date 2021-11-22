@@ -82,3 +82,9 @@
 .content-container {
   padding-left: 220px;
 }
+
+ /* Dashbord Dropdown */
+
+ .drop-down{
+     display: none;
+ }

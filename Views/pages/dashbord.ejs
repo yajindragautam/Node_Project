@@ -1,61 +1,36 @@
 <%- include('../partials/html_header') %>
+    <%- include('../partials/nav') %>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <%- include('../partials/nav') %>
-                    <div class="jumbotron">
-                        <h2>
-                            <%= pageTitle %>
-                        </h2>
-                        <p>
-                            This is a template for a simple marketing or informational website. It includes a large
-                            callout
-                            called the hero unit and three supporting pieces of content. Use it as a starting point to
-                            create something more unique.
-                        </p>
-                        <% if(isLogged){ %>
-                            <h2>
-                                Welcome <%= user.name %>
-                            </h2>
-                            <% } %>
-                                <!-- For Not Logged In Users -->
-                                <% if(!isLogged ) { %>
-                                    <p>
-                                        <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
-                                        <a class="btn btn-success btn-lg" href="/register" role="button">Register</a>
-                                    </p>
-                                    <% } %>
 
-                                        <!-- Sow Only In Logged In -->
-                                        <% if (isLogged ) { %>
-                                            <p>
-                                                <a class="btn btn-primary btn-large" href="/logout">Logout</a>
-                                            </p>
-                                            <% } %>
-                    </div>
+        <div class="sidebar-container">
+            <div class="sidebar-logo">
+                Project Name
             </div>
+            <!-- Sidebar Here -->
+            <%- include('../partials/Sidebar') %>
+
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
+        <div class="content-container">
 
+            <div class="container-fluid">
+
+                <!-- Main component for a primary marketing message or call to action -->
                 <div class="jumbotron">
-                    <h2>
-                        <%= pageTitle %>
-                    </h2>
-                    <%- include('../partials/alert.ejs') %>
-                        <p>
-                            This is a template for a simple marketing or informational website. It includes a large
-                            callout
-                            called the hero unit and three supporting pieces of content. Use it as a starting point to
-                            create something more unique.
-                        </p>
-
+                    <h1>Navbar example</h1>
+                    <p>This example is a quick exercise to illustrate how the default, static and fixed to top
+                        navbar
+                        work. It
+                        includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+                    <p>To see the difference between static and fixed top navbars, just scroll.</p>
+                    <p>
+                        <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar
+                            docs
+                            &raquo;</a>
+                    </p>
                 </div>
+
             </div>
         </div>
 
-    </div>
-
-    <%- include('../partials/html_footer') %>
+        <%- include('../partials/html_footer') %>

@@ -1,4 +1,4 @@
-<%- include('../partials/html_header') %>
+<%- include('../partials/html_header.ejs') %>
 
     <div class="container-fluid">
         <div class="row">
@@ -18,8 +18,9 @@
                                 <a class="nav-link" href="#">Link</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="http://example.com"
-                                    id="navbarDropdownMenuLink" data-toggle="dropdown">Dropdown link</a>
+                                <a class="nav-link dropdown-toggle" 
+                                    id="navbarDropdownMenuLink" data-bs-toggle="dropdown"
+                                    data-toggle="dropdown">Dropdown link</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item"
                                         href="#">Another
@@ -103,4 +104,4 @@
 
     </div>
 
-    <%- include('../partials/html_footer') %>
+    <%- include('../partials/html_footer.ejs') %>

@@ -12,9 +12,9 @@ const BookSchema = new Schema({
   image: {
     type: String,
   },
-  createdBy: {
+  author: {
     type: Schema.Types.ObjectId,
-    ref='User'
+    ref:'User'
   },
   createdAt: {
     type: Date,
