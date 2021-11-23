@@ -11,6 +11,7 @@ const BookValidation = require("../validator/book-validator");
 const LoginValidator = require("../validator/login-validation");
 const ObjectIdCheck = require("../middleware/object-id-check");
 const checkLoggedInMiddleware = require("../middleware/web-middleware");
+const { uploadImageHandler } = require("../handler/image-upload-handler");
 
 // Example Routes
 router.get("/", homeController.home);
@@ -41,10 +42,12 @@ router.get("/dashbord", checkLoggedInMiddleware, homeController.dashbord);
 
 // BOOK CONTROLLER STARTS FROM HERE
 // Get Book
-router
-  .route("/books")
-  .get(checkLoggedInMiddleware, bookController.index)
-  .post(BookValidation, checkLoggedInMiddleware, bookController.store);
+router.route("/books").get(checkLoggedInMiddleware, bookController.index).post(
+  checkLoggedInMiddleware,
+  uploadImageHandler.single("image"),
+  BookValidation,
+  catchFormValidationError(bookController.store)
+);
 // Books By ID
 router
   .route("/books/id")
@@ -52,10 +55,13 @@ router
     ObjectIdCheck,
     BookValidation,
     checkLoggedInMiddleware,
-    bookController.update
+    catchFormValidationError(bookController.update)
   )
   .delete(ObjectIdCheck, checkLoggedInMiddleware, bookController.destroy);
-// Create Books Vie
-router.route("/books/create")
-      .get(checkLoggedInMiddleware,bookController.createView);
+
+// Create Books Views
+router
+  .route("/books/create")
+  .get(checkLoggedInMiddleware, bookController.createView);
+
 module.exports = router;

@@ -3,8 +3,8 @@ const { checkSchema } = require("express-validator");
 const BookValidation = checkSchema({
   title: {
     isLength: {
-      options: { min: 3, max: 255 },
-      errorMessage: "Title must be detween 3 to 225 length",
+      options: { min: 1, max: 255 },
+      errorMessage: "Title is required",
     },
     trim: true,
   },

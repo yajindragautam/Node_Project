@@ -14,7 +14,7 @@ const BookSchema = new Schema({
   },
   author: {
     type: Schema.Types.ObjectId,
-    ref:'User'
+    ref: "User",
   },
   createdAt: {
     type: Date,
@@ -26,6 +26,13 @@ const BookSchema = new Schema({
   },
 });
 
+// Another way to Populate
+function populateAuthor(next) {
+  this.populate("author");
+  next();
+}
+BookSchema.pre("find", populateAuthor);
+BookSchema.pre("findOne", populateAuthor);
 
 // Exporting
 module.exports = mongoose.model("Book", BookSchema);

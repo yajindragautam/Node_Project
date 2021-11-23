@@ -5,4 +5,9 @@ exports.getAllBooks = async () => {
   return Book.find({});
 };
 
+// Store New Created  Book
+exports.storeNewBook = async (book) => {
+  return Book.create(book);
+}
+
 // EXPORTING

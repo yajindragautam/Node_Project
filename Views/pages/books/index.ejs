@@ -10,53 +10,58 @@
         </div>
 
         <div class="content-container">
-            <a href="/books/create" class="m-2">
-                <button type="button" class="btn btn-success">Add Book</button>
-            </a>
-            <div class="container-fluid">
-                <div class="row">
+            <%- include('../../partials/alert.ejs') %>
+                <a href="/books/create" class="m-2">
+                    <button type="button" class="btn btn-success">Add Book</button>
+                </a>
+                <div class="container-fluid">
+                    <div class="row">
 
-                    <div class="col-md-12">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        Title
-                                    </th>
-                                    <th>
-                                        Author
-                                    </th>
-                                    <th>
-                                        Creadte By
-                                    </th>
-                                    <th>
-                                        Actions
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% books.forEach(book=>{ %>
-                                    <tr class="table-active">
-                                        <td>
-                                            book.title
-                                        </td>
-                                        <td>
-                                            books.author
-                                        </td>
-                                        <td>
-                                            book.createdAt
-                                        </td>
-                                        <td>
-                                            Edit
-                                        </td>
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Title
+                                        </th>
+                                        <th>
+                                            Author
+                                        </th>
+                                        <th>
+                                            Creadte By
+                                        </th>
+                                        <th>
+                                            Actions
+                                        </th>
                                     </tr>
-                                    <% }) %>
+                                </thead>
+                                <tbody>
+                                    <% books.forEach(book=>{ %>
+                                        <tr>
+                                            <td>
+                                                <%= book.title %>
+                                            </td>
+                                            <td>
+                                                <%= book.author ? book.author.name : "N/A" %>
+                                            </td>
+                                            <td>
+                                                <%= book.createdAt %>
+                                            </td>
+                                            <td>
+                                                <a href="/books/<%= book.id %>/edit" class="btn btn-primary btn-sm"><i
+                                                        class="fas fa-edit"></i>Edit</a>
+                                                <form action="books/<%= book.id %>?_method=DELETE" method="POST">
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                                            class="fas fa-trash"></i> Delete</button </form>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
 
         </div>
 

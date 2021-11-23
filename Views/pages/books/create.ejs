@@ -1,30 +1,67 @@
-<%- include('../../partials/html_header') %>
-    <%- include('../../partials/nav') %>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <form role="form">
-                        <div class="form-group">
+<%- include('../../partials/html_header.ejs') %>
+    <%- include('../../partials/nav.ejs') %>
 
-                            <label for="exampleInputEmail1">
-                                Email address
-                            </label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" />
-                        </div>
-                        <div class="form-group">
+        <div class="sidebar-container">
+            <div class="sidebar-logo">
+                <%= pageTitle %>
+            </div>
+            <!-- Sidebar Here -->
+            <%- include('../../partials/Sidebar') %>
+        </div>
 
-                            <label for="exampleInputPassword1">
-                                Password
-                            </label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" />
-                        </div>
+        <div class="content-container">
+            <div class="container-fluid px-4">
+                <h2>
+                    <%= pageTitle %>
+                </h2>
+                <%- include('../../partials/alert.ejs') %>
+                    <div class="col-md-12">
+                        <form action="/books" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
 
-                        <button type="submit" class="btn btn-primary">
-                            Submit
-                        </button>
-                    </form>
-                </div>
+                                <label for="title">
+                                    Title
+                                </label>
+
+                                <input type="text" name="title" class="
+                                            form-control
+                                            <%=
+                                            errors.title
+                                            ?
+                                            'is-invalid'
+                                            :
+                                            ''
+                                            %>
+                                          " id="title" value="<%= oldData.title || '' %>" />
+                                <div class="invalid-feedback">
+                                    <%= errors.title ? errors.title.msg : "" %>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">
+                                    Description
+                                </label>
+                                <input type="text" name="description" value="<%= oldData.description || '' %>" class="form-control
+                                    <%= errors.description ? 'is-invalid' : '' %>" id="description" />
+                                <div class="invalid-feedback">
+                                    <%= errors.description ? errors.description.msg : "" %>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="image">Choose Book Cover Page</label>
+                                <input type="file" class="form-control
+                                                            <%= errors.image ? 'is-valid': '' %> " id="image"
+                                    name="image" />
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">
+                                Create Book
+                            </button>
+                        </form>
+                    </div>
             </div>
         </div>
 
-        <%- include('../../partials/html_footer') %>
+
+        <%- include('../../partials/html_footer.ejs') %>
