@@ -5,6 +5,7 @@ const authController = require("../controller/system/auth-controller");
 const bookController = require("../controller/system/book-controller");
 const {
   catchFormValidationError,
+  catchValidationError,
 } = require("../handler/validation-error-handler");
 const UserValidator = require("../validator/user-validator");
 const BookValidation = require("../validator/book-validator");
@@ -42,26 +43,35 @@ router.get("/dashbord", checkLoggedInMiddleware, homeController.dashbord);
 
 // BOOK CONTROLLER STARTS FROM HERE
 // Get Book
-router.route("/books").get(checkLoggedInMiddleware, bookController.index).post(
-  checkLoggedInMiddleware,
-  uploadImageHandler.single("image"),
-  BookValidation,
-  catchFormValidationError(bookController.store)
-);
-// Books By ID
 router
-  .route("/books/id")
-  .put(
-    ObjectIdCheck,
-    BookValidation,
+  .route("/books")
+  .get(checkLoggedInMiddleware, bookController.index)
+  .post(
     checkLoggedInMiddleware,
-    catchFormValidationError(bookController.update)
-  )
-  .delete(ObjectIdCheck, checkLoggedInMiddleware, bookController.destroy);
-
+    uploadImageHandler.single("image"),
+    BookValidation,
+    catchFormValidationError(bookController.store)
+  );
 // Create Books Views
 router
   .route("/books/create")
   .get(checkLoggedInMiddleware, bookController.createView);
+// Books By ID
+router
+  .route("/books/:id")
+  .put(
+    [
+      checkLoggedInMiddleware,
+      uploadImageHandler.single("image"),
+      BookValidation,
+    ],
+    catchFormValidationError(bookController.update)
+  )
+  .delete(checkLoggedInMiddleware, bookController.destroy);
 
+// Edit View
+router.get("/books/:id/edit", checkLoggedInMiddleware, bookController.editView);
+
+// 404 Routes
+router.route("/404").get(bookController.notFound);
 module.exports = router;

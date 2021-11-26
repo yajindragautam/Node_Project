@@ -1,0 +1,28 @@
+<%- include('../../partials/html_header.ejs') %>
+    <%- include('../../partials/nav.ejs') %>
+
+        <div class="sidebar-container">
+            <div class="sidebar-logo">
+                <%= pageTitle %>
+            </div>
+            <!-- Sidebar Here -->
+            <%- include('../../partials/Sidebar') %>
+        </div>
+
+        <div class="content-container">
+            <div class="container-fluid px-4">
+                <h2>
+                    <%= pageTitle %>
+                </h2>
+                <%- include('../../partials/alert.ejs') %>
+                    <div class="col-md-12">
+                        <form method="POST" action="/books/<%= book._id %>?_method=PUT" enctype="multipart/form-data">
+                            <!-- Importing Form -->
+                            <%- include('./partial/form.ejs') %>
+                        </form>
+                    </div>
+            </div>
+        </div>
+
+
+        <%- include('../../partials/html_footer.ejs') %>
